@@ -37,10 +37,7 @@ services:
         - "traefik.http.routers.erpnext-nginx.middlewares=erpnext-nginx"
         - "traefik.http.routers.erpnext-nginx.entrypoints=web"
         - "traefik.http.services.erpnext-nginx.loadbalancer.server.port=8080"
-        - "com.docker.compose.project=erpnextshopsthai"
-        - "virtual.host=erpnext.shopsthai.com"
-        - "virtual.tls-email=limweb@hotmail.com"
-        - "virtual.port=80"           
+
     volumes:
       - sites-vol:/var/www/html/sites:rw
       - assets-vol:/assets:rw
@@ -50,6 +47,11 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+    labels:
+        - "com.docker.compose.project=erpnextshopsthai"
+        - "virtual.host=erpnext.shopsthai.com"
+        - "virtual.tls-email=limweb@hotmail.com"
+        - "virtual.port=8000"              
     environment:
       - MARIADB_HOST=mariadb
       - REDIS_CACHE=redis-cache:6379
